@@ -37,11 +37,12 @@ function readMarkdownFiles(dirPath) {
             let fileText = filePath.replace(/..\\..\\/, '')
             str += `[${title}](${fileText})` + '\r\n'
 
-            fs.writeFile('./link.markdown', str, err => {
+            fs.writeFile('./link.markdown', str.replace("/\\\\/g","\\/"), err => {
               if (err) {
                 console.error(err)
                 return
               }
+              console.error('输出成功！')
               //文件写入成功。
             })
           });
